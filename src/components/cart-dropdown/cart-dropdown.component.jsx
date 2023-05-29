@@ -5,11 +5,7 @@ import { selectCartItems } from '../../store/cart/cart.selector';
 import Button from '../button/button.component';
 import CartItem from '../cart-item/cart-item.component';
 
-import {
-  CartDropdownContainer,
-  EmptyMessage,
-  CartItems,
-} from './cart-dropdown.styles';
+import styles from './cart-dropdown.module.scss';
 
 const CartDropdown = () => {
   const cartItems = useSelector(selectCartItems);
@@ -20,16 +16,16 @@ const CartDropdown = () => {
   };
 
   return (
-    <CartDropdownContainer>
-      <CartItems>
+    <div className={`${styles.cartDropdownContainer}`}>
+      <div className={`${styles.cartItems}`}>
         {cartItems.length ? (
           cartItems.map((item) => <CartItem key={item.id} cartItem={item} />)
         ) : (
-          <EmptyMessage>Your cart is empty</EmptyMessage>
+          <span className={`${styles.emptyMessage}`}>Your cart is empty</span>
         )}
-      </CartItems>
-      <Button onClick={goToCheckoutHandler}>GO TO CHECKOUT</Button>
-    </CartDropdownContainer>
+      </div>
+      <Button onClick={goToCheckoutHandler} style={{'marginTop': 'auto'}}>GO TO CHECKOUT</Button>
+    </div>
   );
 };
 

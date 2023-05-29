@@ -8,7 +8,7 @@ import {
   createUserDocumentFromAuth,
 } from '../../utils/firebase/firebase.utils';
 
-import { SignUpContainer } from './sign-up-form.styles';
+import styles from './sign-up-form.module.scss';
 
 const defaultFormFields = {
   displayName: '',
@@ -57,48 +57,19 @@ const SignUpForm = () => {
   };
 
   return (
-    <SignUpContainer>
+    <div className={`${styles.container}`}>
       <h2>Don't have an account?</h2>
       <span>Sign up with your email and password</span>
-      <form onSubmit={handleSubmit}>
-        <FormInput
-          label='Display Name'
-          type='text'
-          required
-          onChange={handleChange}
-          name='displayName'
-          value={displayName}
-        />
-
-        <FormInput
-          label='Email'
-          type='email'
-          required
-          onChange={handleChange}
-          name='email'
-          value={email}
-        />
-
-        <FormInput
-          label='Password'
-          type='password'
-          required
-          onChange={handleChange}
-          name='password'
-          value={password}
-        />
-
-        <FormInput
-          label='Confirm Password'
-          type='password'
-          required
-          onChange={handleChange}
-          name='confirmPassword'
-          value={confirmPassword}
-        />
-        <Button type='submit'>Sign Up</Button>
+      <form onSubmit={(event) => handleSubmit(event)}>
+          <FormInput label='Display Name' type='text' name='displayName' required onChange={handleChange} value= {displayName} />
+          <FormInput label='Email' type='email' name='email' required onChange={handleChange} value={email}/>
+          <FormInput label='Password' type='password' name='password' required onChange={handleChange} value={password} />
+          <FormInput label='Confirm Password' type='password' name='confirmPassword' required onChange={handleChange} value={confirmPassword} />
+          <Button type={'submit'}>
+              Sign up
+          </Button>
       </form>
-    </SignUpContainer>
+    </div>
   );
 };
 

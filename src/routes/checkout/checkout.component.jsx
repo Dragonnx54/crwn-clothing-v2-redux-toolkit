@@ -7,41 +7,46 @@ import {
 
 import CheckoutItem from '../../components/checkout-item/checkout-item.component';
 
-import {
-  CheckoutContainer,
-  CheckoutHeader,
-  HeaderBlock,
-  Total,
-} from './checkout.styles';
+import styles from './checkout.module.scss';
+import { Fragment } from 'react';
 
 const Checkout = () => {
   const cartItems = useSelector(selectCartItems);
   const cartTotal = useSelector(selectCartTotal);
 
   return (
-    <CheckoutContainer>
-      <CheckoutHeader>
-        <HeaderBlock>
-          <span>Product</span>
-        </HeaderBlock>
-        <HeaderBlock>
-          <span>Description</span>
-        </HeaderBlock>
-        <HeaderBlock>
-          <span>Quantity</span>
-        </HeaderBlock>
-        <HeaderBlock>
-          <span>Price</span>
-        </HeaderBlock>
-        <HeaderBlock>
-          <span>Remove</span>
-        </HeaderBlock>
-      </CheckoutHeader>
-      {cartItems.map((cartItem) => (
-        <CheckoutItem key={cartItem.id} cartItem={cartItem} />
-      ))}
-      <Total>Total: ${cartTotal}</Total>
-    </CheckoutContainer>
+    <div className={`${styles.container}`}>
+      {
+          cartItems.length ? (
+              <Fragment>
+                  <div className={`${styles.checkoutHeader}`}>
+                      <div className={`${styles.headerBlock}`}>
+                          <span>{'Product'}</span>
+                      </div>
+                      <div className={`${styles.headerBlock}`}>
+                          <span>{'Description'}</span>
+                      </div>
+                      <div className={`${styles.headerBlock}`}>
+                          <span>{'Quantity'}</span>
+                      </div>
+                      <div className={`${styles.headerBlock}`}>
+                          <span>{'Price'}</span>
+                      </div>
+                      <div className={`${styles.headerBlock}`}>
+                          <span>{'Remove'}</span>
+                      </div>
+                  </div>
+                  {cartItems.map((cartItem) => (
+                      <CheckoutItem cartItem={cartItem} key={cartItem.id}/>
+                  ))}
+                  
+                  <span className={`${styles.total}`}>{`Total $${cartTotal}`}</span>
+              </Fragment>
+          ) : (
+              <span>{'No items added yet'}</span>
+          )
+      }
+    </div>
   );
 };
 
